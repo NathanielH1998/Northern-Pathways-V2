@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Northern Pathways Home Education &amp; Wellbeing Centre</title>
+<meta content="Evidence-informed support for homeschooled students with disabilities, families, schools and community partners." name="description"/>
+<style>
+    :root {
+      --bg: #f7f3eb;
+      --paper: #fffdf8;
+      --ink: #243129;
+      --muted: #69736c;
+      --sage: #7f9a82;
+      --sage-dark: #4f6b57;
+      --clay: #c98f6b;
+      --cream: #efe5d4;
+      --line: #ded8cc;
+      --shadow: 0 16px 40px rgba(45, 54, 47, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behaviour: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+    a { color: var(--sage-dark); }
+    img { max-width: 100%; display: block; }
+
+    .topbar {
+      background: #243129;
+      color: #f8f5ef;
+      padding: 10px 20px;
+      font-size: .92rem;
+      text-align: center;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 72vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(28, 38, 31, .48), rgba(28, 38, 31, .48)),
+        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85') center center / cover no-repeat;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 100px;
+      background: linear-gradient(to top, var(--bg), transparent);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1120px, calc(100% - 36px));
+      padding: 72px 0 96px;
+      color: white;
+    }
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(7px);
+      padding: 8px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      font-size: .76rem;
+      font-weight: 800;
+    }
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(2.7rem, 7vw, 5.7rem);
+      line-height: .97;
+      max-width: 950px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 600;
+    }
+    .hero p {
+      max-width: 760px;
+      font-size: 1.16rem;
+      color: #f2efe8;
+      margin-bottom: 28px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.32);
+    }
+    .btn.primary { background: white; color: var(--ink); }
+    .btn.secondary { color: white; background: rgba(255,255,255,.10); }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,253,248,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+    .nav-ribbon {
+      width: min(1180px, 100%);
+      margin: auto;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 14px;
+      scrollbar-width: thin;
+    }
+    .tab-btn {
+      border: 0;
+      background: transparent;
+      color: #5c675f;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+      font-size: .91rem;
+    }
+    .tab-btn:hover,
+    .tab-btn.active {
+      background: var(--cream);
+      color: var(--sage-dark);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 36px));
+      margin: 44px auto 80px;
+    }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .section-head { margin-bottom: 26px; }
+    .section-head .label {
+      color: var(--sage-dark);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 900;
+      font-size: .76rem;
+    }
+    h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      margin: 6px 0 8px;
+      line-height: 1.08;
+      font-weight: 600;
+    }
+    h3 { margin-top: 0; }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 860px; }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 20px;
+      margin: 22px 0;
+    }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .profile {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    .portrait-placeholder {
+      min-height: 320px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #d9e2d4, #b8c8b7);
+      display: grid;
+      place-items: center;
+      color: #425146;
+      text-align: center;
+      padding: 24px;
+      border: 1px dashed #8ea18e;
+    }
+    .pill {
+      display: inline-block;
+      background: #e4ede3;
+      color: var(--sage-dark);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: .78rem;
+      margin: 3px 5px 3px 0;
+    }
+    .citation-box {
+      border-left: 4px solid var(--clay);
+      background: #fbf1e9;
+      padding: 18px 20px;
+      border-radius: 12px;
+      margin-top: 18px;
+    }
+    .maslow {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 8px;
+      align-items: center;
+      margin: 28px auto;
+      max-width: 760px;
+    }
+    .level {
+      color: white;
+      padding: 14px 18px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 800;
+    }
+    .l1 { width: 100%; background: #8c6f5c; }
+    .l2 { width: 88%; background: #9e866a; }
+    .l3 { width: 74%; background: #819276; }
+    .l4 { width: 60%; background: #6b826f; }
+    .l5 { width: 46%; background: #4f6b57; }
+    .strategy-list li { margin-bottom: 10px; }
+    .case {
+      border-top: 5px solid var(--sage-dark);
+    }
+    .case small { color: var(--muted); font-weight: 800; }
+    .placeholder-note {
+      background: #fff8dd;
+      border: 1px solid #ead89f;
+      color: #665a29;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 18px 0;
+    }
+
+    footer {
+      background: #243129;
+      color: #e8ece8;
+      padding: 44px 20px;
+    }
+    footer .inner { width: min(1120px, 100%); margin: auto; }
+    footer a { color: #dce8d8; }
+
+    @media (max-width: 850px) {
+      .grid-2, .grid-3, .profile { grid-template-columns: 1fr; }
+      .hero { min-height: 64vh; }
+      .hero-inner { padding-top: 56px; }
+    }
+  
+.image-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:22px 0}
+.image-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.image-card img{width:100%;height:260px;object-fit:cover;display:block}
+.image-card .caption{padding:12px 14px;font-size:.82rem;color:var(--muted)}
+.location-box{display:grid;grid-template-columns:1fr 1.2fr;gap:20px;align-items:stretch}
+.map-frame{width:100%;min-height:330px;border:0;border-radius:16px}
+.initiative-number{font-size:2rem;font-weight:900;color:var(--accent);line-height:1}
+@media(max-width:800px){.image-gallery,.location-box{grid-template-columns:1fr}}
+
+
+.agency-map{position:relative;min-height:360px;background:linear-gradient(180deg,#eef6f1,#f9fbfa);border:1px solid var(--line);border-radius:18px;overflow:hidden;padding:22px}
+.agency-map:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(79,70,229,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(79,70,229,.05) 1px,transparent 1px);background-size:38px 38px}
+.map-node{position:absolute;z-index:2;max-width:210px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);font-size:.85rem}
+.map-node strong{display:block;color:var(--accent);margin-bottom:3px}
+.map-node.richmond{left:8%;top:18%}.map-node.windsor{left:44%;top:50%}.map-node.gables{right:7%;top:13%}
+.route-line{position:absolute;height:3px;background:#b9b8e8;transform-origin:left center;z-index:1}
+.route-a{left:27%;top:36%;width:34%;transform:rotate(24deg)}
+.route-b{left:55%;top:39%;width:31%;transform:rotate(-24deg)}
+.transport-table{width:100%;border-collapse:collapse}
+.transport-table th,.transport-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.transport-table th{background:#f3f4f8}
+.service-badge{display:inline-block;padding:4px 9px;border-radius:999px;background:#eef0ff;color:#4038c7;font-size:.75rem;font-weight:800;margin-bottom:7px}
+@media(max-width:800px){.agency-map{min-height:520px}.map-node.richmond{left:5%;top:8%}.map-node.windsor{left:5%;top:40%}.map-node.gables{left:5%;right:auto;top:72%}.route-line{display:none}.transport-table{font-size:.9rem}}
+
+
+.maslow-pyramid{max-width:820px;margin:24px auto;display:flex;flex-direction:column;align-items:center;gap:8px}.maslow-row{padding:13px 18px;border-radius:10px;text-align:center;color:white;box-shadow:var(--shadow)}.maslow-row strong{display:block}.maslow-row span{font-size:.83rem}.m5{width:48%;background:#4f46e5}.m4{width:60%;background:#2563eb}.m3{width:72%;background:#0f766e}.m2{width:84%;background:#b45309}.m1{width:96%;background:#9a3412}.quote-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}.quote-card blockquote{margin:0;font-size:1.08rem;line-height:1.6;font-style:italic}.stat-big{font-size:2.6rem;font-weight:900;color:var(--accent);line-height:1}.case-news{border-top:5px solid var(--accent)}@media(max-width:800px){.maslow-row{width:100%!important}}
+
+.concern-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:20px 0}
+.concern-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.concern-card h3{margin-top:4px}.risk-label{display:inline-block;padding:4px 9px;border-radius:999px;background:#fff1f2;color:#9f1239;font-size:.76rem;font-weight:800;margin-bottom:6px}
+.rc-card{border-left:5px solid var(--accent)}
+@media(max-width:800px){.concern-grid{grid-template-columns:1fr}}
+.policy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:20px 0}.policy-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}.flowchart{max-width:860px;margin:26px auto;display:flex;flex-direction:column;align-items:center;gap:8px}.flow-step{width:86%;background:#fff;border:2px solid #dfe2ef;border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);position:relative}.flow-step strong{display:block;color:var(--accent);font-size:1.06rem;margin-bottom:5px}.flow-arrow{font-size:1.8rem;color:#8188a2;line-height:1}.policy-note{border-left:5px solid #0f766e}@media(max-width:800px){.policy-grid{grid-template-columns:1fr}.flow-step{width:100%}}
+.workshop-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:20px 0}.workshop-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}.parent-maslow{max-width:850px;margin:25px auto;display:flex;flex-direction:column;align-items:center;gap:8px}.pm{padding:14px 18px;border-radius:11px;color:#fff;text-align:center;box-shadow:var(--shadow)}.pm strong{display:block}.pm span{font-size:.82rem}.pm5{width:48%;background:#4f46e5}.pm4{width:60%;background:#2563eb}.pm3{width:72%;background:#0f766e}.pm2{width:84%;background:#b45309}.pm1{width:96%;background:#9a3412}@media(max-width:800px){.workshop-grid{grid-template-columns:1fr}.pm{width:100%!important}}
+
+.case-study-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow);margin:22px 0}.case-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.case-meta>div{background:#f7f8fb;border-radius:14px;padding:16px}.initiative-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.initiative-list>div{background:#f4faf7;border:1px solid #d9ebe2;border-radius:14px;padding:16px}.future-box{border-left:4px solid var(--accent)}@media(max-width:800px){.case-meta,.initiative-list{grid-template-columns:1fr}}
+
+.hybrid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:20px 0}.hybrid-card,.resource-item,.contact-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:var(--shadow)}.resource-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.references p{padding-bottom:10px;border-bottom:1px solid var(--line)}@media(max-width:800px){.hybrid-grid,.resource-list{grid-template-columns:1fr}}
+
+.current-issues{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:22px 0}
+.issue-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.issue-card h3{margin-top:4px}
+.issue-tag{display:inline-block;padding:4px 9px;border-radius:999px;background:#eef0ff;color:#4038c7;font-size:.76rem;font-weight:800;margin-bottom:6px}
+@media(max-width:800px){.current-issues{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar">Evidence-informed support for homeschooled students with disabilities and their families</div>
+<header aria-label="Welcoming cottage-style education centre" class="hero">
+<div class="hero-inner">
+<span class="eyebrow">Local home education • disability • wellbeing</span>
+<h1>Northern Pathways Home Education &amp; Wellbeing Centre</h1>
+<p>A warm, community-connected educational service supporting homeschooled students with disabilities through evidence-informed strategies, family partnership and meaningful links with schools and local agencies.</p>
+<div class="hero-actions">
+<a class="btn primary" href="#home-profile">Meet the Principal Educator</a>
+<a class="btn secondary" href="#purpose">Our Purpose</a>
+</div>
+</div>
+</header>
+<div class="nav-wrap">
+<nav aria-label="Assessment website sections" class="nav-ribbon">
+<button class="tab-btn active" data-target="tab1">Home</button>
+<button class="tab-btn" data-target="tab2">1 What: Home Schooling</button>
+<button class="tab-btn" data-target="tab3">2 What: Agency Support</button>
+<button class="tab-btn" data-target="tab4">3 What: Recent Circumstances</button>
+<button class="tab-btn" data-target="tab5">4 So What: Concerns</button>
+<button class="tab-btn" data-target="tab6">5 So What: Policy &amp; Setup</button>
+<button class="tab-btn" data-target="tab7">6 So What: Parent Enrichment</button>
+<button class="tab-btn" data-target="tab8">7 Now What: Case Studies</button>
+<button class="tab-btn" data-target="tab9">8 Now What: Local Schools</button>
+<button class="tab-btn" data-target="tab10">9 Now What: Contact &amp; Resources</button>
+</nav>
+</div>
+<main>
+<section class="panel active" id="tab1">
+<div class="section-head"><div class="label">HOME</div><h1>Northern Pathways</h1>
+<p class="lead">A proposed home education and wellbeing centre in Richmond, NSW, supporting families of students with disability. I am Nathaniel Hammill, a preservice primary teacher. My aim is to help families build an education program that is safe, purposeful and connected to the local community.</p></div>
+<div class="grid-2"><div class="card"><h3>Why the centre exists</h3><p>Home-schooling registrations in NSW have more than doubled since 2019, and many children moving from public schools into home schooling have disability recorded in school data (Audit Office of NSW, 2025). Northern Pathways responds by combining curriculum planning with community participation and wellbeing support.</p></div>
+<div class="card"><h3>What families can expect</h3><p>I use Maslow’s hierarchy as a planning lens: physical and sensory needs, safety, belonging, confidence and future goals all matter alongside academic learning. The centre does not replace qualified health professionals; it helps families connect education with appropriate local services.</p></div></div>
+</section>
+<section class="panel" id="tab2">
+<div class="section-head"><div class="label">WHAT? · TAB 1</div><h2>What can home schooling offer students with disability?</h2></div>
+<div class="card"><p><strong>Northern Pathways</strong> is a proposed Richmond, NSW centre with a physical base so families can meet, access resources and take part in small-group learning without relying only on the family home. NSW guidance allows parents to adapt learning to a child’s individual needs while still working from NSW syllabuses.</p>
+<p><strong>Three initiatives:</strong> (1) low-cost learning profiles that identify strengths, interests, adjustments and suitable ways to show learning; (2) bespoke community learning, such as museum, gallery, park and aquatic-centre visits linked to syllabus outcomes; and (3) family navigation sessions covering registration, curriculum planning and referrals to appropriate local disability or wellbeing services.</p>
+<p>These initiatives matter because flexibility can reduce sensory or attendance pressure, but home schooling can also narrow access to specialist teaching and peers if families are left to manage alone (Paulauskaite et al., 2022). My role is therefore to support flexibility without allowing it to become isolation.</p>
+<p class="small"><a href="https://www.nsw.gov.au/education-and-training/home-schooling" target="_blank">NSW Home Schooling</a> · <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.995217/full" target="_blank">Paulauskaite et al. (2022)</a></p></div>
+<div class="card"><h3>Location</h3><p>Richmond, NSW 2753, in the Hawkesbury area. The location provides access to public transport, parks, libraries, health services and community facilities while remaining close to families across north-west Sydney.</p></div>
+</section>
+<section class="panel" id="tab3">
+<div class="section-head"><div class="label">WHAT? · TAB 2</div><h2>What support can agencies offer?</h2></div>
+<div class="card"><p>Northern Pathways would collaborate with <strong>headspace Hawkesbury</strong> for youth mental-health support, <strong>Autism Spectrum Australia (Aspect)</strong> for autism-specific education and family guidance, and <strong>Hawkesbury City Council</strong> for inclusive community, library and recreation opportunities. Contact would be made through each organisation’s published service team rather than inventing named staff members.</p>
+<p>A regular week could use Richmond Library, Hawkesbury Regional Gallery, Hawkesbury Regional Museum, Oasis Aquatic and Leisure Centre, Richmond Park and local medical/allied-health services. Families can plan routes through Transport for NSW.</p>
+<p>Other useful counselling or psychology pathways include headspace, Kids Helpline, Relationships Australia NSW and the Australian Psychological Society’s Find a Psychologist service. For students with disability, wellbeing is strengthened when education includes belonging, predictable relationships and meaningful community participation rather than focusing only on completed schoolwork.</p>
+<p class="small"><a href="https://headspace.org.au/headspace-centres/hawkesbury/" target="_blank">headspace Hawkesbury</a> · <a href="https://www.aspect.org.au/" target="_blank">Aspect</a> · <a href="https://www.hawkesbury.nsw.gov.au/" target="_blank">Hawkesbury City Council</a> · <a href="https://transportnsw.info/trip" target="_blank">Transport NSW</a></p></div>
+</section>
+<section class="panel" id="tab4">
+<div class="section-head"><div class="label">WHAT? · TAB 3</div><h2>Why has home schooling increased?</h2></div>
+<div class="card"><p>Home schooling is not new, but COVID-19 made learning at home familiar to many families and exposed gaps in adjustments for some students with disability. During shutdowns, Disability Royal Commission evidence described students missing accessible teaching, individual support and peer contact.</p>
+<p>NSW registrations rose from <strong>5,906 in 2019 to 12,762 in 2024</strong>. The Audit Office also reported that, among registered home-schooled children who had previously attended NSW public schools, the estimated proportion recorded with disability increased from about 35% to 54% across that period.</p>
+<p>Media accounts show that families may choose home schooling after anxiety, school refusal or repeated experiences of exclusion. Maslow helps explain why: if safety and belonging are not secure, participation in learning can become difficult. However, moving learning home does not automatically meet these needs; families still need deliberate peer, community and professional connections.</p>
+<p class="small"><a href="https://www.audit.nsw.gov.au/our-work/reports/alternative-school-settings-and-home-schooling" target="_blank">Audit Office NSW (2025)</a> · <a href="https://www.education.gov.au/swd/resources/review-impact-covid19-school-students-disability" target="_blank">Australian Government (2024)</a></p></div>
+
+<div class="section-head" style="margin-top:30px">
+<div class="label">RECENT PRESSURES ON PARENT CHOICE</div>
+<h2>Why some families may look beyond a standard school model</h2>
+</div>
+<div class="current-issues">
+<div class="issue-card">
+<span class="issue-tag">Guardian Australia · August 2026</span>
+<h3>Leah: when a flexible program disappears</h3>
+<p>Guardian Australia reported on Leah, a Year 8 student with complex medical needs who had been able to return from hospital and continue learning through a self-directed Montessori stream. Her mother said the flexibility reduced anxiety because Leah did not have to re-enter a class that had moved far ahead while she was absent. The stream is now being phased out as Victorian schools move towards a stronger emphasis on explicit instruction.</p>
+<p>For this website, the important point is not that explicit instruction is “bad”. It is that one teaching approach will not suit every learner in every situation. When parents see a program that works for their child disappear, home schooling or another flexible arrangement can become more attractive because it gives them greater control over pace, method and continuity.</p>
+<p class="small"><a href="https://www.theguardian.com/australia-news/2026/aug/03/montessori-learning-is-being-shut-down-at-leahs-school-is-a-push-towards-explicit-instruction-to-blame" target="_blank">Guardian Australia — Montessori learning and Leah (2026)</a></p>
+</div>
+<div class="issue-card">
+<span class="issue-tag">ABC News · August 2026</span>
+<h3>Tommy: exclusion when a setting cannot meet disability-related needs</h3>
+<p>ABC News reported that four-year-old Tommy Schumacher, who has Perthes disease and uses a wheelchair, was excluded from his early learning centre after the service said its change area could no longer safely accommodate his disability-related needs. His mother described the decision as abrupt, and the family had not found another centre able to take him.</p>
+<p>Tommy is not a home-schooling case, but his experience shows why parents of children with disability may lose confidence in mainstream services when reasonable access depends on facilities, staffing or funding that are not available. A home-based option may feel safer or more controllable, although it also transfers significant responsibility back to the family.</p>
+<p class="small"><a href="https://www.abc.net.au/news/2026-08-15/4yo-tommy-excluded-from-early-learning-centre-re-disability/107037334" target="_blank">ABC News — Tommy Schumacher (15 August 2026)</a></p>
+</div>
+</div>
+<div class="parent-maslow"><div class="pm pm5"><strong>Growth</strong><span>interests, choice and future goals</span></div><div class="pm pm4"><strong>Esteem</strong><span>success and confidence</span></div><div class="pm pm3"><strong>Belonging</strong><span>family, peers and community</span></div><div class="pm pm2"><strong>Safety</strong><span>predictability and emotional security</span></div><div class="pm pm1"><strong>Physical needs</strong><span>rest, movement and sensory comfort</span></div></div>
+</section>
+<section class="panel" id="tab5">
+<div class="section-head"><div class="label">SO WHAT? · TAB 4</div><h2>What are the concerns about home schooling?</h2></div>
+<div class="card"><p><strong>Educational disadvantage:</strong> parents may not have the specialist knowledge, equipment, time or income needed to reproduce the support available in a well-resourced school. Research with families of children with neurodevelopmental conditions identified access to resources, social activities and specialist help as practical barriers (Paulauskaite et al., 2022).</p>
+<p><strong>Safeguarding:</strong> fewer routine contacts with teachers and professionals can reduce opportunities for concerns about physical or sexual abuse to be noticed or disclosed. This is a visibility issue, not evidence that home schooling itself causes abuse; NSW Parliamentary research has noted the lack of evidence for a simple causal claim.</p>
+<p><strong>Social isolation:</strong> peer contact no longer happens automatically and must be planned. News reporting on students with disability has shown how exclusion from school can leave young people spending long periods at home without a stable alternative.</p>
+<p>The Disability Royal Commission’s education hearings are relevant here. In the case of “Sam”, repeated suspension was followed by home schooling, meaning he lost professional teaching and everyday opportunities to form peer relationships. The broader Commission evidence also links exclusion, inadequate adjustments and low expectations with long-term effects on education, mental health and adult pathways. For me, this means home schooling needs protective community contact, not just a change of location.</p>
+<p class="small"><a href="https://disability.royalcommission.gov.au/publications/report-public-hearing-7-barriers-experienced-students-disability-accessing-and-obtaining-safe-quality-and-inclusive-school-education-and-consequent-life-course-impacts" target="_blank">Disability Royal Commission</a></p></div>
+</section>
+<section class="panel" id="tab6">
+<div class="section-head"><div class="label">SO WHAT? · TAB 5</div><h2>What policies support home schooling?</h2></div>
+<div class="card"><p>Under the <strong>Education Act 1990 (NSW)</strong>, registered home schooling is a legitimate way to meet compulsory education requirements. NSW guidance also allows children with disability or additional learning needs to be registered, with parents adapting the program while using relevant NSW syllabuses.</p>
+<p>A weakness is that a compliant plan on paper does not guarantee high-quality teaching every day. The Audit Office of NSW identified limitations in historical monitoring of program quality and student progress, creating scope for poor provision to go unnoticed.</p>
+<p>Nationally, the <strong>Disability Standards for Education 2005</strong> provide a useful benchmark for access, participation, consultation and reasonable adjustment. Internationally, Article 24 of the <strong>UN Convention on the Rights of Persons with Disabilities</strong> recognises equal access to education. Neither framework specifically promotes home schooling; both reinforce the child’s right to meaningful participation.</p></div>
+<div class="flowchart"><div class="flow-step"><strong>1 · Register</strong>Check NSW eligibility and registration requirements.</div><div class="flow-arrow">↓</div><div class="flow-step"><strong>2 · Plan</strong>Use NSW syllabuses and identify the child’s strengths, needs and adjustments.</div><div class="flow-arrow">↓</div><div class="flow-step"><strong>3 · Prepare</strong>Create an accessible learning space, resources and community-learning routine.</div><div class="flow-arrow">↓</div><div class="flow-step"><strong>4 · Review</strong>Keep evidence of learning and adjust the program as progress and needs change.</div></div>
+<p class="small"><a href="https://www.nsw.gov.au/education-and-training/home-schooling" target="_blank">NSW Home Schooling</a> · <a href="https://www.education.gov.au/disability-standards-education-2005" target="_blank">Disability Standards</a></p>
+</section>
+<section class="panel" id="tab7">
+<div class="section-head"><div class="label">SO WHAT? · TAB 6</div><h2>How can parents enrich home schooling?</h2></div>
+<div class="card"><p>Parents often know their child’s triggers, interests, communication preferences and local community better than anyone else. This can support genuinely tailored learning: a child who struggles with noise may learn in shorter sessions, while a strong interest can be used to build literacy, numeracy or inquiry tasks. Research identifies personalisation and one-to-one support as possible strengths of home education, although these need to be balanced with specialist advice and social opportunities (Paulauskaite et al., 2022).</p>
+<p>ABC News reported on Fletcher, an autistic child whose mother used his interest in pop music to increase engagement with learning. The case also highlighted the need to maintain opportunities for social interaction outside the home.</p></div>
+<div class="workshop-grid"><div class="workshop-card"><strong>NSW syllabus webinars</strong><p>Practical help reading outcomes and planning a compliant program.</p></div><div class="workshop-card"><strong>Disability planning webinars</strong><p>NSW guidance on individual learning needs and adjustments.</p></div><div class="workshop-card"><strong>Resourcing Inclusive Communities</strong><p>Workshops on belonging, relationships and valued community roles.</p></div><div class="workshop-card"><strong>Northern Pathways workshop</strong><p>“Building a Week That Works”: parents map sensory needs, interests, curriculum, movement, peer contact and community learning into one realistic weekly plan.</p></div></div>
+<div class="callout"><strong>Cultural responsiveness:</strong> I would also ask about family culture, language, identity and community priorities rather than assuming one idea of independence or wellbeing suits every child.</div>
+<div class="parent-maslow"><div class="pm pm5"><strong>Growth</strong><span>choice and meaningful goals</span></div><div class="pm pm4"><strong>Esteem</strong><span>visible progress and strengths</span></div><div class="pm pm3"><strong>Belonging</strong><span>planned peer and community contact</span></div><div class="pm pm2"><strong>Safety</strong><span>predictable routines and communication</span></div><div class="pm pm1"><strong>Physical</strong><span>rest, movement and sensory needs</span></div></div>
+</section>
+<section class="panel" id="tab8">
+<div class="section-head"><div class="label">NOW WHAT? · TAB 7</div><h2>Two bespoke case studies</h2></div>
+<div class="grid-2"><div class="card"><h3>Gemma’s daughter</h3><p>Guardian Australia reported that Gemma Troughton moved to home schooling after her autistic daughter experienced severe anxiety around school. Immediate concerns were emotional safety and re-engagement; longer-term concerns include friendships and independence. Two practical challenges are the loss of family income when a parent stops work and the need to organise peer contact.</p><p>I would recommend an OT-informed sensory plan, psychological support for anxiety and one regular interest-based social activity. Future planning would gradually include independent travel, self-advocacy and community recreation so home schooling does not narrow adult options.</p></div>
+<div class="card"><h3>Taylor Lloyd</h3><p>Guardian Australia reported that Taylor’s family chose home schooling after difficulties obtaining the inclusive mainstream education they wanted for him. Immediate concerns were meaningful communication and learning; longer-term concerns include social life, accommodation choices and adult participation. Challenges include replacing specialist expertise and avoiding a social world made up mostly of family and therapists.</p><p>I would recommend AAC/speech pathology support, accessible recreation and a physiotherapy-informed movement routine. Longer-term learning would include decision-making, community access and supported work or volunteering connected to Taylor’s interests.</p></div></div>
+<p class="small"><a href="https://www.theguardian.com/australia-news/2023/nov/26/we-havent-looked-back-home-schooling-in-australia-seeing-post-lockdown-boom" target="_blank">Troughton case</a> · <a href="https://www.theguardian.com/australia-news/2022/oct/26/queensland-family-fights-to-stop-schools-from-determining-childrens-education-based-on-disabilities" target="_blank">Lloyd case</a></p>
+</section>
+<section class="panel" id="tab9">
+<div class="section-head"><div class="label">NOW WHAT? · TAB 8</div><h2>Contact with local schools</h2></div>
+<div class="card"><p>Northern Pathways maintains contact with local schools so students can keep pathways to peers, specialist staff, sport, wellbeing services and future re-entry open. In NSW, registered home schooling is not automatically a legal part-time public-school arrangement, so any hybrid approach would need to fit current enrolment and school policy rather than being promised to families.</p>
+<p>Useful local-school supports include learning and support teams, school sport and physical activity, and counselling/wellbeing services. A benefit of a carefully negotiated mixed model is that it can combine lower-pressure individual learning with broader relationships and facilities. A disadvantage is that changing between settings can increase anxiety and sensory load when routines or adjustments are inconsistent.</p></div>
+
+<div class="section-head" style="margin-top:30px">
+<div class="label">AI, SCHOOLING &amp; PARENT CHOICE</div>
+<h2>Would an AI robot teacher make families more or less likely to choose school?</h2>
+</div>
+<div class="card">
+<h3>The Salamanca humanoid robot pilot</h3>
+<p>In July 2026, Guardian reporting described a planned pilot at Salamanca High School in New York involving a humanoid robot called Sally and an AI teaching assistant. Supporters promoted personalised learning and supervised exposure to emerging technology, while teachers, community members and the New York State Education Department raised concerns about privacy, safeguards, cultural sensitivity and functions that should remain with trained professionals.</p>
+<p>For students with high support needs, AI could be useful when it provides repetition, accessible formats, communication support or practice at an individual pace. The ethical problem begins when a system is treated as a substitute for relationships, professional judgement or accountability. Students whose wellbeing depends on trusted adults, careful observation and responsive adjustments may be particularly affected if “personalisation” is reduced to an algorithm rather than a teacher knowing the student.</p>
+<p>This could influence parent schooling choices in both directions. Some families may prefer a school or hybrid setting if AI gives their child better accessibility while qualified teachers remain responsible. Other parents may become more interested in home schooling if they believe classroom technology is replacing human contact, collecting too much data or being introduced without meaningful consultation. Northern Pathways would therefore use AI only as an optional learning tool, with a person remaining responsible for teaching, wellbeing and decisions.</p>
+<p class="small"><a href="https://www.theguardian.com/us-news/2026/jul/25/new-york-humanoid-robot-teachers-school" target="_blank">The Guardian — Salamanca humanoid robot and AI teaching assistant (25 July 2026)</a></p>
+</div>
+<div class="parent-maslow"><div class="pm pm5"><strong>Growth</strong><span>projects at home + pathways and mentors</span></div><div class="pm pm4"><strong>Esteem</strong><span>individual success + school/community achievement</span></div><div class="pm pm3"><strong>Belonging</strong><span>family security + peers and trusted adults</span></div><div class="pm pm2"><strong>Safety</strong><span>predictable home learning + agreed school adjustments</span></div><div class="pm pm1"><strong>Physical</strong><span>flexible regulation + accessible facilities</span></div></div>
+<p class="small"><a href="https://education.nsw.gov.au/schooling/parents-and-carers/inclusive-learning-support" target="_blank">Inclusive learning support</a> · <a href="https://app.education.nsw.gov.au/sport/" target="_blank">NSW School Sport</a></p>
+</section>
+<section class="panel" id="tab10">
+<div class="section-head"><div class="label">NOW WHAT? · TAB 9</div><h2>Contact and resources</h2></div>
+<div class="contact-panel"><p><strong>Northern Pathways Home Education &amp; Wellbeing Centre</strong><br/>Principal Educator: Nathaniel Hammill<br/>Proposed location: Richmond, NSW 2753<br/>Consultations: curriculum planning, adjustments, community learning, school-transition discussions and referrals. Northern Pathways is a fictional agency created for this assessment.</p></div>
+<div class="section-head"><div class="label">10 PARENT SITES</div></div>
+<div class="resource-list">
+<div class="resource-item"><a href="https://www.nsw.gov.au/education-and-training/home-schooling" target="_blank">1. NSW Home Schooling</a></div>
+<div class="resource-item"><a href="https://curriculum.nsw.edu.au/" target="_blank">2. NSW Curriculum</a></div>
+<div class="resource-item"><a href="https://www.education.gov.au/disability-standards-education-2005" target="_blank">3. Disability Standards for Education</a></div>
+<div class="resource-item"><a href="https://www.aspect.org.au/" target="_blank">4. Autism Spectrum Australia</a></div>
+<div class="resource-item"><a href="https://raisingchildren.net.au/disability" target="_blank">5. Raising Children Network</a></div>
+<div class="resource-item"><a href="https://www.ric.org.au/" target="_blank">6. Resourcing Inclusive Communities</a></div>
+<div class="resource-item"><a href="https://headspace.org.au/" target="_blank">7. headspace</a></div>
+<div class="resource-item"><a href="https://kidshelpline.com.au/" target="_blank">8. Kids Helpline</a></div>
+<div class="resource-item"><a href="https://www.hawkesbury.nsw.gov.au/" target="_blank">9. Hawkesbury City Council</a></div>
+<div class="resource-item"><a href="https://transportnsw.info/trip" target="_blank">10. Transport for NSW</a></div></div>
+<div class="section-head"><div class="label">REFERENCES</div><h2>Sources consulted</h2></div>
+<div class="card references">
+<p>Audit Office of New South Wales. (2025). <em>Alternative school settings and home schooling.</em> <a href="https://www.audit.nsw.gov.au/our-work/reports/alternative-school-settings-and-home-schooling" target="_blank">Source</a></p>
+<p>Australian Government Department of Education. (2024). <em>Review of the impact of COVID-19 on school students with disability.</em> <a href="https://www.education.gov.au/swd/resources/review-impact-covid19-school-students-disability" target="_blank">Source</a></p>
+<p>Australian Government Department of Education. (2005). <em>Disability Standards for Education 2005.</em> <a href="https://www.education.gov.au/disability-standards-education-2005" target="_blank">Source</a></p>
+<p>Moir, L., &amp; Davison, C. (2023). Is a whole school approach to inclusion really meeting the needs of all learners? Home-schooling parents’ perceptions. <em>Education Sciences, 13</em>(6), 571. <a href="https://doi.org/10.3390/educsci13060571" target="_blank">https://doi.org/10.3390/educsci13060571</a></p>
+<p>Paulauskaite, L., et al. (2022). Parents’ experiences of elective home education for children with neurodevelopmental conditions. <em>Frontiers in Psychology, 13</em>. <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.995217/full" target="_blank">Source</a></p>
+<p>Royal Commission into Violence, Abuse, Neglect and Exploitation of People with Disability. (2020–2023). <em>Education and COVID-19 public hearing materials.</em> <a href="https://disability.royalcommission.gov.au/" target="_blank">Source</a></p>
+<p>NSW Government. (2026). <em>Home schooling.</em> <a href="https://www.nsw.gov.au/education-and-training/home-schooling" target="_blank">Source</a></p>
+<p>United Nations. (2006). <em>Convention on the Rights of Persons with Disabilities: Article 24—Education.</em> <a href="https://www.un.org/development/desa/disabilities/convention-on-the-rights-of-persons-with-disabilities/article-24-education.html" target="_blank">Source</a></p>
+<p>ABC News. (2018). <em>How pop music idols help a boy with autism with his home schooling.</em> <a href="https://www.abc.net.au/news/2018-07-24/autism-how-boys-pop-music-idols-help-with-his-home-schooling/10003974" target="_blank">Source</a></p>
+<p>Guardian Australia. (2022, October 26). <em>Queensland family fights to stop schools determining children’s education based on disabilities.</em> <a href="https://www.theguardian.com/australia-news/2022/oct/26/queensland-family-fights-to-stop-schools-from-determining-childrens-education-based-on-disabilities" target="_blank">Source</a></p>
+<p>Guardian Australia. (2023, November 26). <em>‘We haven’t looked back’: Home schooling in Australia seeing post-lockdown boom.</em> <a href="https://www.theguardian.com/australia-news/2023/nov/26/we-havent-looked-back-home-schooling-in-australia-seeing-post-lockdown-boom" target="_blank">Source</a></p>
+<p>Dole, N. (2026, August 15). <em>Four-year-old excluded from early learning centre in NSW due to his disability-related needs.</em> ABC News. <a href="https://www.abc.net.au/news/2026-08-15/4yo-tommy-excluded-from-early-learning-centre-re-disability/107037334" target="_blank">Source</a></p><p>Dhanji, K. (2026, August 4). <em>Montessori learning is being shut down at Leah’s school – is a push towards ‘explicit instruction’ to blame?</em> The Guardian. <a href="https://www.theguardian.com/australia-news/2026/aug/03/montessori-learning-is-being-shut-down-at-leahs-school-is-a-push-towards-explicit-instruction-to-blame" target="_blank">Source</a></p><p>Sainato, M. (2026, July 25). <em>‘Really inappropriate’: Teachers decry plan for humanoid robot in New York high school.</em> The Guardian. <a href="https://www.theguardian.com/us-news/2026/jul/25/new-york-humanoid-robot-teachers-school" target="_blank">Source</a></p></div>
+</section>
+</main>
+<footer>
+<div class="inner">
+<h3>Northern Pathways Home Education &amp; Wellbeing Centre</h3>
+<p>Assessment website prototype using the Rolfe et al. (2008) WHAT → SO WHAT → NOW WHAT reflective structure.</p>
+<p><small>Next build stage: add your selected sources, exact academic citations, stronger evidence in every tab, and final case-study links to Maslow and pedagogical strategies.</small></p>
+</div>
+</footer>
+<script>
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.target;
+        buttons.forEach(b => b.classList.toggle('active', b === button));
+        panels.forEach(panel => panel.classList.toggle('active', panel.id === target));
+        window.scrollTo({ top: document.querySelector('.nav-wrap').offsetTop, behaviour: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
